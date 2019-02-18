@@ -1,0 +1,23 @@
+[
+  {
+    "model": "mentor_tracker.expertisecategory",
+    "pk": 1,
+    "fields": {
+      "category": "Art"
+    }
+  },
+  {
+    "model": "mentor_tracker.expertisecategory",
+    "pk": 2,
+    "fields": {
+      "category": "Design"
+    }
+  },
+  {
+    "model": "mentor_tracker.expertisecategory",
+    "pk": 3,
+    "fields": {
+      "category": "Development"
+    }
+  }
+]
