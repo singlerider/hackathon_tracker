@@ -1,13 +1,14 @@
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
+from mentor_tracker.models import Personnel
 from mentor_tracker.serializers import GroupSerializer, UserSerializer
 from rest_framework import viewsets
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class PersonnelViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = Personnel.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
 
