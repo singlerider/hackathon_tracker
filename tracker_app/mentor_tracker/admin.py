@@ -3,6 +3,7 @@ from mentor_tracker.models import (Device, ExpertiseCategory, Location,
                                    Organization, Personnel,
                                    PersonnelExpertiseCategory,
                                    PersonnelDevice,
+                                   PersonnelLocationEntry,
                                    PersonnelOrganization)
 
 
@@ -48,6 +49,15 @@ class PersonnelDeviceAdmin(admin.ModelAdmin):
     )
 
 
+class PersonnelLocationEntryAdmin(admin.ModelAdmin):
+    readonly_fields = ('timestamp',)
+    search_fields = (
+        "personnel__first_name", "personnel__last_name", "personnel__username",
+        "location__street_address", "location__building_number",
+        "location__floor", "location__description", "signal_strength"
+    )
+
+
 admin.site.register(Personnel, PersonnelAdmin)
 admin.site.register(ExpertiseCategory)
 admin.site.register(
@@ -57,3 +67,4 @@ admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(Device, DeviceAdmin)
 admin.site.register(PersonnelOrganization, PersonnelOrganizationAdmin)
 admin.site.register(PersonnelDevice, PersonnelDeviceAdmin)
+admin.site.register(PersonnelLocationEntry, PersonnelLocationEntryAdmin)

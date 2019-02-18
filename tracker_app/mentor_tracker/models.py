@@ -149,3 +149,41 @@ class PersonnelDevice(models.Model):
             models.Index(fields=["device"]),
             models.Index(fields=["tracked"])
         ]
+
+
+class PersonnelLocationEntry(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True)
+    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    signal_strength = models.IntegerField()
+
+    def __str__(self):
+        if self.personnel.first_name and self.personnel.last_name:
+            return (
+                f"{self.timestamp} - "
+                f"{self.personnel.first_name} {self.personnel.last_name}, "
+                f"{self.location.street_address}, "
+                f"building: {self.location.building_number}, "
+                f"floor: {self.location.floor}, "
+                f"signal strength: {self.signal_strength}"
+            )
+        return (
+            f"{self.timestamp} - "
+            f"{self.personnel.username}"
+            f"{self.location.street_address}, "
+            f"building: {self.location.building_number}, "
+            f"floor: {self.location.floor}, "
+            f"signal strength: {self.signal_strength}"
+        )
+
+    class Meta:
+        verbose_name_plural = "Personnel location entries"
+        indexes = [
+            models.Index(fields=["personnel"]),
+            models.Index(fields=["location"]),
+            models.Index(fields=["timestamp"]),
+            models.Index(fields=["-timestamp"]),
+            models.Index(fields=["personnel", "location"]),
+            models.Index(fields=["personnel", "location", "signal_strength"]),
+            models.Index(fields=["personnel", "location", "timestamp"])
+        ]

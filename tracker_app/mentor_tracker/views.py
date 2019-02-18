@@ -3,6 +3,7 @@ from mentor_tracker.models import (Device, ExpertiseCategory, Location,
                                    Organization, Personnel,
                                    PersonnelDevice,
                                    PersonnelExpertiseCategory,
+                                   PersonnelLocationEntry,
                                    PersonnelOrganization)
 from mentor_tracker.serializers import (DeviceSerializer,
                                         ExpertiseCategorySerializer,
@@ -10,6 +11,7 @@ from mentor_tracker.serializers import (DeviceSerializer,
                                         OrganizationSerializer,
                                         PersonnelDeviceSerializer,
                                         PersonnelExpertiseCategorySerializer,
+                                        PersonnelLocationEntrySerializer,
                                         PersonnelOrganizationSerializer,
                                         PersonnelSerializer)
 from rest_framework import viewsets
@@ -87,3 +89,12 @@ class PersonnelDeviceViewSet(viewsets.ModelViewSet):
     """
     queryset = PersonnelDevice.objects.all()
     serializer_class = PersonnelDeviceSerializer
+
+
+class PersonnelLocationEntryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows personnel locations over time to be viewed
+    or edited.
+    """
+    queryset = PersonnelLocationEntry.objects.all().order_by('-timestamp')
+    serializer_class = PersonnelLocationEntrySerializer

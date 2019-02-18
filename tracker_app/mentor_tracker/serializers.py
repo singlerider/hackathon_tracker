@@ -3,6 +3,7 @@ from mentor_tracker.models import (Device, ExpertiseCategory, Location,
                                    Organization, Personnel,
                                    PersonnelExpertiseCategory,
                                    PersonnelDevice,
+                                   PersonnelLocationEntry,
                                    PersonnelOrganization)
 from rest_framework import serializers
 
@@ -64,3 +65,9 @@ class PersonnelDeviceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PersonnelDevice
         fields = ("url", "personnel", "device", "tracked")
+
+
+class PersonnelLocationEntrySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = PersonnelLocationEntry
+        fields = ("timestamp", "personnel", "location", "signal_strength")
