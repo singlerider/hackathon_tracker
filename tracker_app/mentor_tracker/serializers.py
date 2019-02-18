@@ -7,12 +7,12 @@ from mentor_tracker.models import (Device, ExpertiseCategory, Location,
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class PersonnelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Personnel
         fields = (
-            'url', 'username', 'email', 'groups',
-            'expertise_categories', 'organizations', 'devices'
+            'url', 'username', 'email', 'groups', 'first_name', 'last_name',
+            'expertise_categories', 'organizations', 'devices', 'location'
         )
 
 

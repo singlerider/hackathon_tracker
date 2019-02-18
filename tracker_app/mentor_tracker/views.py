@@ -11,7 +11,7 @@ from mentor_tracker.serializers import (DeviceSerializer,
                                         PersonnelDeviceSerializer,
                                         PersonnelExpertiseCategorySerializer,
                                         PersonnelOrganizationSerializer,
-                                        UserSerializer)
+                                        PersonnelSerializer)
 from rest_framework import viewsets
 
 
@@ -20,7 +20,7 @@ class PersonnelViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Personnel.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    serializer_class = PersonnelSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):

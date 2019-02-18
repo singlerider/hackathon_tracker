@@ -11,6 +11,11 @@ class Personnel(AbstractUser):
     organizations = models.ManyToManyField(
         "Organization", through="PersonnelOrganization")
     devices = models.ManyToManyField("Device", through="PersonnelDevice")
+    location = models.ForeignKey(
+        "Location", on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        verbose_name_plural = "Personnel"
 
 
 class ExpertiseCategory(models.Model):
