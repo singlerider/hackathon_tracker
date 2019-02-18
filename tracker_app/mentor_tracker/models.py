@@ -8,6 +8,8 @@ class Personnel(AbstractUser):
     bio = models.TextField()
     expertise_categories = models.ManyToManyField(
         "ExpertiseCategory", through="PersonnelExpertiseCategory")
+    organizations = models.ManyToManyField(
+        "Organization", through="PersonnelOrganization")
 
 
 class ExpertiseCategory(models.Model):
@@ -82,6 +84,20 @@ class Organization(models.Model):
             models.Index(fields=["name"]),
             models.Index(fields=["description"])
         ]
+
+
+class PersonnelOrganization(models.Model):
+    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    role = models.CharField(max_length=50)
+
+    def __str__(self):
+        if self.personnel.first_name and self.personnel.last_name:
+            return (
+                f"{self.personnel.first_name} {self.personnel.last_name}, "
+                f"{self.organization.name}"
+            )
+        return f"{self.personnel.username}, {self.organization.name}"
 
 
 class Device(models.Model):

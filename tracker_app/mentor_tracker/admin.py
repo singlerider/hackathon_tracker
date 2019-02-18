@@ -1,7 +1,8 @@
 from django.contrib import admin
 from mentor_tracker.models import (Device, ExpertiseCategory, Location,
                                    Organization, Personnel,
-                                   PersonnelExpertiseCategory)
+                                   PersonnelExpertiseCategory,
+                                   PersonnelOrganization)
 
 
 class PersonnelAdmin(admin.ModelAdmin):
@@ -31,6 +32,13 @@ class DeviceAdmin(admin.ModelAdmin):
     search_fields = ("make", "product", "version", "uuid")
 
 
+class PersonnelOrganizationAdmin(admin.ModelAdmin):
+    search_fields = (
+        "personnel__first_name", "personnel__last_name", "personnel__username",
+        "organization__name"
+    )
+
+
 admin.site.register(Personnel, PersonnelAdmin)
 admin.site.register(ExpertiseCategory)
 admin.site.register(
@@ -38,3 +46,4 @@ admin.site.register(
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(Device, DeviceAdmin)
+admin.site.register(PersonnelOrganization, PersonnelOrganizationAdmin)

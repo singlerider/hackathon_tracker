@@ -1,14 +1,18 @@
 from django.contrib.auth.models import Group
 from mentor_tracker.models import (Device, ExpertiseCategory, Location,
                                    Organization, Personnel,
-                                   PersonnelExpertiseCategory)
+                                   PersonnelExpertiseCategory,
+                                   PersonnelOrganization)
 from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Personnel
-        fields = ('url', 'username', 'email', 'groups')
+        fields = (
+            'url', 'username', 'email', 'groups',
+            'expertise_categories', 'organizations'
+        )
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -47,3 +51,9 @@ class DeviceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Device
         fields = ("url", "make", "product", "version", "uuid")
+
+
+class PersonnelOrganizationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = PersonnelOrganization
+        fields = ("url", "personnel", "organization", "role")
