@@ -10,6 +10,7 @@ class Personnel(AbstractUser):
         "ExpertiseCategory", through="PersonnelExpertiseCategory")
     organizations = models.ManyToManyField(
         "Organization", through="PersonnelOrganization")
+    devices = models.ManyToManyField("Device", through="PersonnelDevice")
 
 
 class ExpertiseCategory(models.Model):
@@ -116,4 +117,30 @@ class Device(models.Model):
             models.Index(fields=["product"]),
             models.Index(fields=["version"]),
             models.Index(fields=["uuid"])
+        ]
+
+
+class PersonnelDevice(models.Model):
+    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    tracked = models.BooleanField(default=True)
+
+    def __str__(self):
+        if self.personnel.first_name and self.personnel.last_name:
+            return (
+                f"{self.personnel.first_name} {self.personnel.last_name}, "
+                f"{self.device.uuid}, Tracked: {self.tracked}"
+            )
+        return (
+            f"{self.personnel.username}, {self.device.uuid}, "
+            f"Tracked: {self.tracked}"
+        )
+
+    class Meta:
+        unique_together = ("personnel", "device",)
+        indexes = [
+            models.Index(fields=["personnel", "device"]),
+            models.Index(fields=["personnel"]),
+            models.Index(fields=["device"]),
+            models.Index(fields=["tracked"])
         ]
