@@ -1,5 +1,5 @@
 from django.contrib.auth.models import Group
-from mentor_tracker.models import (ExpertiseCategory, Personnel,
+from mentor_tracker.models import (ExpertiseCategory, Location, Personnel,
                                    PersonnelExpertiseCategory)
 from rest_framework import serializers
 
@@ -27,3 +27,10 @@ class PersonnelExpertiseCategorySerializer(
     class Meta:
         model = PersonnelExpertiseCategory
         fields = ('url', 'personnel', 'expertise_category')
+
+
+class LocationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Location
+        fields = (
+            "url", "street_address", "building_number", "floor", "description")

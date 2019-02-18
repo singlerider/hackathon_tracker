@@ -1,8 +1,9 @@
 from django.contrib.auth.models import Group
-from mentor_tracker.models import (ExpertiseCategory, Personnel,
+from mentor_tracker.models import (ExpertiseCategory, Location, Personnel,
                                    PersonnelExpertiseCategory)
 from mentor_tracker.serializers import (ExpertiseCategorySerializer,
                                         GroupSerializer,
+                                        LocationSerializer,
                                         PersonnelExpertiseCategorySerializer,
                                         UserSerializer)
 from rest_framework import viewsets
@@ -39,3 +40,12 @@ class PersonnelExpertiseCategoryViewSet(viewsets.ModelViewSet):
     """
     queryset = PersonnelExpertiseCategory.objects.all()
     serializer_class = PersonnelExpertiseCategorySerializer
+
+
+class LocationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows personnel expertise catagories to be viewed
+    or edited.
+    """
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer

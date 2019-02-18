@@ -24,6 +24,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'expertisecategories', views.ExpertiseCategoryViewSet)
 router.register(
     r'personnelexpertisecategories', views.PersonnelExpertiseCategoryViewSet)
+router.register('locations', views.LocationViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

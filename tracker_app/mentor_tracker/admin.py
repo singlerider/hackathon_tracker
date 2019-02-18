@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mentor_tracker.models import (ExpertiseCategory, Personnel,
+from mentor_tracker.models import (ExpertiseCategory, Location, Personnel,
                                    PersonnelExpertiseCategory)
 
 
@@ -14,7 +14,14 @@ class PersonnelExpertiseCategoryAdmin(admin.ModelAdmin):
     )
 
 
+class LocationAdmin(admin.ModelAdmin):
+    search_fields = (
+        "street_address", "building_number", "floor", "description"
+    )
+
+
 admin.site.register(Personnel, PersonnelAdmin)
 admin.site.register(ExpertiseCategory)
 admin.site.register(
     PersonnelExpertiseCategory, PersonnelExpertiseCategoryAdmin)
+admin.site.register(Location, LocationAdmin)

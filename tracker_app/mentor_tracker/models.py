@@ -45,3 +45,26 @@ class PersonnelExpertiseCategory(models.Model):
             models.Index(fields=["personnel"]),
             models.Index(fields=["expertise_category"])
         ]
+
+
+class Location(models.Model):
+    street_address = models.TextField(null=False)
+    building_number = models.CharField(max_length=20, null=True)
+    floor = models.CharField(max_length=15, null=True)
+    description = models.TextField(null=True)
+
+    def __str__(self):
+        if not self.building_number or not self.floor:
+            return self.street_address
+        return (
+            f"{self.street_address}, building: {self.building_number}, "
+            f"floor: {self.floor}"
+        )
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["street_address"]),
+            models.Index(fields=["building_number"]),
+            models.Index(fields=["floor"]),
+            models.Index(fields=["description"])
+        ]
