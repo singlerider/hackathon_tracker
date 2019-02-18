@@ -1,7 +1,9 @@
 from django.contrib.auth.models import Group
-from mentor_tracker.models import (ExpertiseCategory, Location, Organization,
-                                   Personnel, PersonnelExpertiseCategory)
-from mentor_tracker.serializers import (ExpertiseCategorySerializer,
+from mentor_tracker.models import (Device, ExpertiseCategory, Location,
+                                   Organization, Personnel,
+                                   PersonnelExpertiseCategory)
+from mentor_tracker.serializers import (DeviceSerializer,
+                                        ExpertiseCategorySerializer,
                                         GroupSerializer, LocationSerializer,
                                         OrganizationSerializer,
                                         PersonnelExpertiseCategorySerializer,
@@ -53,7 +55,15 @@ class LocationViewSet(viewsets.ModelViewSet):
 
 class OrganizationViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows locations to be viewed or edited.
+    API endpoint that allows organizations to be viewed or edited.
     """
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
+
+
+class DeviceViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows devices to be viewed or edited.
+    """
+    queryset = Device.objects.all()
+    serializer_class = DeviceSerializer

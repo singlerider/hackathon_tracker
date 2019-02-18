@@ -82,3 +82,22 @@ class Organization(models.Model):
             models.Index(fields=["name"]),
             models.Index(fields=["description"])
         ]
+
+
+class Device(models.Model):
+    make = models.CharField(max_length=40, help_text="Example: Apple")
+    product = models.CharField(max_length=40, help_text="Example: Galaxy")
+    version = models.CharField(max_length=40, help_text="Example: Xs Max")
+    uuid = models.CharField(
+        max_length=17, help_text="Example: 00:00:00:00:00:00", unique=True)
+
+    def __str__(self):
+        return f"{self.make} {self.product} {self.version}: {self.uuid}"
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["make"]),
+            models.Index(fields=["product"]),
+            models.Index(fields=["version"]),
+            models.Index(fields=["uuid"])
+        ]
