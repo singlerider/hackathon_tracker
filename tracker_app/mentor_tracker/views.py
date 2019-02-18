@@ -1,9 +1,9 @@
 from django.contrib.auth.models import Group
-from mentor_tracker.models import (ExpertiseCategory, Location, Personnel,
-                                   PersonnelExpertiseCategory)
+from mentor_tracker.models import (ExpertiseCategory, Location, Organization,
+                                   Personnel, PersonnelExpertiseCategory)
 from mentor_tracker.serializers import (ExpertiseCategorySerializer,
-                                        GroupSerializer,
-                                        LocationSerializer,
+                                        GroupSerializer, LocationSerializer,
+                                        OrganizationSerializer,
                                         PersonnelExpertiseCategorySerializer,
                                         UserSerializer)
 from rest_framework import viewsets
@@ -27,7 +27,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class ExpertiseCategoryViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows expertise catagories to be viewed or edited.
+    API endpoint that allows expertise categories to be viewed or edited.
     """
     queryset = ExpertiseCategory.objects.all()
     serializer_class = ExpertiseCategorySerializer
@@ -35,7 +35,7 @@ class ExpertiseCategoryViewSet(viewsets.ModelViewSet):
 
 class PersonnelExpertiseCategoryViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows personnel expertise catagories to be viewed
+    API endpoint that allows personnel expertise categories to be viewed
     or edited.
     """
     queryset = PersonnelExpertiseCategory.objects.all()
@@ -44,8 +44,16 @@ class PersonnelExpertiseCategoryViewSet(viewsets.ModelViewSet):
 
 class LocationViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows personnel expertise catagories to be viewed
+    API endpoint that allows locations to be viewed
     or edited.
     """
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+
+
+class OrganizationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows locations to be viewed or edited.
+    """
+    queryset = Organization.objects.all()
+    serializer_class = OrganizationSerializer
