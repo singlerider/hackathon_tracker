@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+cloud_sql_proxy -instances="mentor-tracker:us-central1:mentor-tracker-postgres"=tcp:5432

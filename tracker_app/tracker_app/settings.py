@@ -25,7 +25,14 @@ SECRET_KEY = 'mx%5()$ac3d=4c(_+9=-an#xh18^s%9q-9ozlfr)$r=@3nxzv='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "mentor-tracker.shane.gg",
+    "www.mentor-tracker.shane.gg",
+    "mentor-tracker.appspot.com",
+    "www.mentor-tracker.appspot.com",
+    "127.0.0.1",
+    "0.0.0.0"
+]
 
 
 # Application definition
@@ -77,10 +84,26 @@ WSGI_APPLICATION = 'tracker_app.wsgi.application'
 
 DATABASES = {
     'default': {
+        # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
+        # 'ENGINE': 'django.db.backends.mysql' instead of the following.
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tracker_app',
+        'USER': 'postgres',
+        'PASSWORD': 'p33gEnsbN4bkt9rz',
+        # Any local Cloud SQL Proxy instances must be set to tcp:3306.
+        'PORT': '5432',
+        'HOST': '/cloudsql/mentor-tracker:us-central1:mentor-tracker-postgres'
+    },
+    'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+if os.getenv('GAE_INSTANCE'):
+    pass
+else:
+    DATABASES['default']['HOST'] = '127.0.0.1'
 
 
 # Password validation
@@ -127,3 +150,5 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "mentor_tracker.Personnel"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
